@@ -25,7 +25,7 @@ const MyTableInfo = () => {
         <th scope="col">Качество</th>
         <th scope="col">Профессия</th>
         <th scope="col">Оценка</th>
-        <th></th>
+        <th>qqqq</th>
     </tr>
   </thead>
   <tbody>
