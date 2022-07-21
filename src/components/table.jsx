@@ -13,7 +13,7 @@ const MyTableInfo = () => {
 
   function resultTableAfterDeletingAllUsers() {
     return (
-      <div className="badge bg-primary text-wrap Text_wrap">Таблица пуста</div>
+      <div className="badge bg-danger m-2 divDeleteTable">Таблица пуста!</div>
     );
   }
 
@@ -21,8 +21,15 @@ const MyTableInfo = () => {
     setUsers((users) => users.concat(userData));
   };
 
+  const deletedTable = () => {
+    setUsers(users.filter((user) => user.length --));
+  };
+
+  const handleReset = () => {
+    setUsers(api.users.fetchAll())
+  }
   return (
-    <>
+    <> 
       {users.length === 0 ? (
         resultTableAfterDeletingAllUsers()
       ) : (
@@ -57,13 +64,15 @@ const MyTableInfo = () => {
         </table>
       )}
       <button
-        className={"btn btn-primary Add_Button"}
+        className={"btn btn-primary btn-sm Add_Button"}
         onClick={() => {
           setIsAdding(true);
         }}
       >
         Добавить пользователя
       </button>
+           <span onClick={deletedTable}>{users.length === 0 ? '' : <button className="btn btn-primary btn-sm m-2">Удалить вcех пользователей</button>}</span>
+           <button className="btn btn-danger btn-sm m-1" onClick={handleReset}>Сбросить</button>
       {isAdding ? <AddForm addUser={addUser} /> : null}
     </>
   );

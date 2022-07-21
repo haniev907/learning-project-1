@@ -5,8 +5,6 @@ const AddForm = (props) => {
   const [quality, setQuality] = useState('');
   const [profession, setProfession] = useState('');
   const [estimation, setEstimation] = useState('');
-  
-
   const onChangeInput = (cb) => {
     return (event) => {
       const value = event.target.value;
@@ -31,13 +29,14 @@ const AddForm = (props) => {
   
   return (
     <div>
-      <input value={name} onChange={onChangeInput(setName)} />
-      <input value={quality} onChange={onChangeInput(setQuality)} />
-      <input value={profession} onChange={onChangeInput(setProfession)} />
-      <input value={estimation} onChange={onChangeInput(setEstimation)} />
-      <button onClick={onClickSubmit}>Готово</button>
+      <input type={'text'} className="form-control input" value={name} placeholder = "Имя" onChange={onChangeInput(setName)} />
+      <input type={'text'} className="form-control input" value={quality} placeholder = "Качество" onChange={onChangeInput(setQuality)} />
+      <input type={'text'} className="form-control input" value={profession} placeholder = "Профессия" onChange={onChangeInput(setProfession)} />
+      <input type={'number'} className="form-control input" value={estimation} placeholder = "Оценка /5"  onChange={onChangeInput(setEstimation)} />
+      <button className="btn btn-outline-primary btn-sm button-next" onClick={onClickSubmit}>Готово</button>
     </div>
   );
 };
 
 export default AddForm;
+ 

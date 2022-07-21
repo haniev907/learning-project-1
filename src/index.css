@@ -1,6 +1,15 @@
-
- .navPage{
-    margin-left: 40em;
+.input{
+    width: 30%;
+    margin-top: 10px;
+    margin-left: 30em;
+}
+.divDeleteTable{
+    font-size: 18px;
+}
+.button-next{
+    width: 30%;
+    margin-top: 3px;
+    margin-left: 34.3em;
 }
 .delete_Button{
     margin-left: 20px;
