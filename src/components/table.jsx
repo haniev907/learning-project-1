@@ -107,7 +107,7 @@ const MyTableInfo = () => {
       <button className="btn btn-danger btn-sm m-1" onClick={handleReset}>Сбросить</button>
       { editingUser ? <EditForm editUser={editUser} editingUser={editingUser} /> : null }
       { isAdding ? <AddForm addUser={addUser} /> : null}
-      { !editingUser && !isAdding ? <DeleteUserById deleteUserById={handleDelete} /> : null }
+      { !editingUser ? <DeleteUserById deleteUserById={handleDelete} /> : null }
     </>
   );
 };
