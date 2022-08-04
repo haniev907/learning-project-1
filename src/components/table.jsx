@@ -10,7 +10,8 @@ import { setAllUsers } from "../features/user/userSlice";
 
 const MyTableInfo = () => {
   const dispatch = useDispatch();
-  dispatch(setAllUsers(api.users.fetchAll()));
+
+  // dispatch(setAllUsers(api.users.fetchAll()));
 
   const Users = useSelector((state) => state.user.AllUsers);
 
@@ -25,8 +26,13 @@ const MyTableInfo = () => {
     const user = Users.find(user => user._id === userId);
     console.log(user)
     onIsArсhive(user);
-    Users.filter((user) => user._id !== userId);
+    const newUsers = Users.filter((user) => user._id !== userId);
+
+    dispatch(
+      setAllUsers(newUsers)
+    );
   };
+
 
   const onIsArсhive = user => {
     setIsArсhive([...isArсhive, user]);
@@ -39,7 +45,10 @@ const MyTableInfo = () => {
   };
 
   const addUser = (userData) => {
-    Users((users) => users.concat(userData));
+    const newUsers = Users.concat(userData);
+    dispatch(
+      setAllUsers(newUsers)
+    )
     onUserAdded();
   };
 
