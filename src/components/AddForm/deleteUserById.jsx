@@ -15,6 +15,6 @@ const DeleteUserById = ({ deleteUserById }) => {
             <button onClick={() => deleteUserById('ID: ' + id)} className = 'btn btn-danger btn-sm ms-2'>Удалить</button>
         </div>
      );
-}
- 
+};
+
 export default DeleteUserById;

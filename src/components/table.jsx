@@ -3,55 +3,67 @@ import api from "../api";
 import AddForm from './AddForm';
 import EditForm from "./AddForm/editForm";
 import DeleteUserById from "./AddForm/deleteUserById";
-import ArhiveUsers from "./AddForm/arhiveUsers";
+import ArchiveUsers from './AddForm/arhiveUsers'
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { setAllUsers } from "../features/user/userSlice";
 
 const MyTableInfo = () => {
-  const [users, setUsers] = useState(api.users.fetchAll());
+  const dispatch = useDispatch();
+  dispatch(setAllUsers(api.users.fetchAll()));
+
+  const Users = useSelector((state) => state.user.AllUsers);
+
+  // const [users, setUsers] = useState(api.users.fetchAll());
   const [isAdding, setIsAdding] = useState(false);
   const [editingUser, setEditingUser] = useState();
-  const [isArhive, setIsArhive] = useState([]);
+  const [isArсhive, setIsArсhive] = useState([]);
 
   // const [isEdit, setIsEdit] = useState();
 
   const handleDelete = (userId) => {
-    const user = users.find(user => user._id === userId);
-    onIsArhive(user);
-    setUsers(users.filter((user) => user._id !== userId));
+    const user = Users.find(user => user._id === userId);
+    console.log(user)
+    onIsArсhive(user);
+    Users.filter((user) => user._id !== userId);
   };
 
-  const onIsArhive = user => {
-    setIsArhive([...isArhive, user]);
+  const onIsArсhive = user => {
+    setIsArсhive([...isArсhive, user]);
   };
 
   function resultTableAfterDeletingAllUsers() {
     return (
       <div className="badge bg-danger m-2 divDeleteTable">Все пользователи были перемещены в архив</div>
     );
-  }
+  };
 
   const addUser = (userData) => {
-    setUsers((users) => users.concat(userData));
+    Users((users) => users.concat(userData));
     onUserAdded();
   };
 
   const onUserAdded = () => {
-    setIsAdding(false)
+    setIsAdding(false);
   };
-
+  const fromTableToArchive = () => {
+    setIsArсhive([...Users]);
+  }
   const deletedTable = () => {
-    setUsers([]);
+    Users([]);
+    fromTableToArchive();
   };
 
   const handleReset = () => {
-    setUsers(api.users.fetchAll())
+    Users();
   };
 
   const handleEdit = (id) => {
-    setEditingUser(users.find(user => user._id === id));
+    setEditingUser(Users.find(user => user._id === id));
   };
 
   const editUser = (id, newData) => {
-    setUsers(users.map(user => user._id === id ? { ...newData, _id: id } : user));
+    Users(Users.map(user => user._id === id ? { ...newData, _id: id } : user));
     onUserEdit();
   };
 
@@ -61,7 +73,7 @@ const MyTableInfo = () => {
 
   return (
     <div> 
-      {users.length === 0 ? (
+      {Users.length === 0 ? (
         resultTableAfterDeletingAllUsers()
       ) : (
         <table class="table table table-dark table-striped">
@@ -72,12 +84,12 @@ const MyTableInfo = () => {
               <th scope="col">Качество</th>
               <th scope="col">Профессия</th>
               <th scope="col">Оценка</th>
-              <th>Колличество пользователей: {users.length}</th>
+              <th>Колличество пользователей: {Users.length}</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user}>
+            {Users.map((user) => (
+              <tr key={user._id}>
                 <td>{user._id}</td>
                 <td className="">{user.name}</td>
                 <td className="td_table">{user.qualities}</td>
@@ -111,12 +123,12 @@ const MyTableInfo = () => {
         Добавить пользователя
       </button>
       
-      {users.length === 0 ? '' : <button onClick={deletedTable} className="btn btn-primary btn-sm m-2">Удалить вcех пользователей</button>}
+      {Users.length === 0 ? '' : <button onClick={deletedTable} className="btn btn-primary btn-sm m-2">Добавить вcех в архив</button>}
       <button className="btn btn-danger btn-sm m-1" onClick={handleReset}>Сбросить</button>
       { !editingUser && ! isAdding ? <DeleteUserById deleteUserById={handleDelete} /> : null }
       { editingUser ? <EditForm editUser={editUser} editingUser={editingUser} /> : null }
       { isAdding ? <AddForm addUser={addUser} /> : null}
-      <ArhiveUsers arhiveUsers = {isArhive} />
+      <ArchiveUsers arсhiveUsers = {isArсhive} />
     </div>
   );
 };
