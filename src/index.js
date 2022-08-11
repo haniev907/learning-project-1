@@ -10,4 +10,4 @@ reactDom.render(
       <MyTableInfo/>
    </Provider>,
     document.querySelector('#root')
-    )
+)
