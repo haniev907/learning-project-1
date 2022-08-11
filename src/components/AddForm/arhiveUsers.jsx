@@ -12,7 +12,7 @@ const  ArchiveUsers = ( {arсhiveUsers} ) => {
           {count === 0 ? (
             archiveIsEmpty()
           ):
-             <table class="table table-ligth table-striped">
+             <table className="table table-ligth table-striped">
           <thead>
             <tr>
               <th scope="col">ID пользователя</th>
@@ -25,7 +25,7 @@ const  ArchiveUsers = ( {arсhiveUsers} ) => {
           </thead>
           <tbody>
             {arсhiveUsers.map((user) => (
-              <tr key={user}>
+              <tr key={user._id}>
                 <td>{user._id}</td>
                 <td className="">{user.name}</td>
                 <td className="td_table">{user.qualities}</td>

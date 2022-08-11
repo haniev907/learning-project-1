@@ -21,6 +21,15 @@
     margin-top: 3px;
     margin-left: 34.3em;
 }
+.inputEditNameForm{
+  width: 20%;
+  margin-top: -20px;
+  margin-left: 30em;
+}
+.btnEditName{
+  margin-top: -65px;
+  margin-left: 55.1em;
+}
 .delete_Button{
     margin-left: 20px;
 }
@@ -42,8 +51,57 @@
     color: #212529;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #bdbdbd;
+    border: 1px solid #d4cdcd;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     display: inline;
   }
+  .text-field__input::after{
+    border: 1px solid #d4cdcd;
+  }
+  .users-name{
+    cursor: pointer;
+  }
+  a{
+    text-decoration: none;
+    color: #fff;
+  }
+  a:hover{
+    color: #fff;
+    text-decoration:underline ;
+  }
+  .loader {
+    width: 48px;
+    height: 48px;
+    border-width: 3px;
+    border-style: dashed solid  solid dotted;
+    border-color: #000000 #0e0e0d transparent #111111;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 22em;
+    margin-left: 41.5em;
+    position: relative;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .loader::after {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 20px;
+    top: 31px;
+    border: 10px solid transparent;
+    border-right-color: #0d0d0d;
+    transform: rotate(-40deg);
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  };
+  
+  
