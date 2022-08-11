@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import api from '../api'
 import AddForm from './AddForm';
 import EditForm from "./AddForm/editForm";
 import Loading from "./Loading";
@@ -9,6 +8,8 @@ import EditUserName from './AddForm/editUserName'
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setAllUsers } from "../features/user/userSlice";
+
+import axios from 'axios'
 
 const MyTableInfo = () => {
   const dispatch = useDispatch();
@@ -21,12 +22,24 @@ const MyTableInfo = () => {
   const [editingUserName, setEditUserName] = useState();
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-      dispatch(setAllUsers(
-        api.users.fetchAll()
-      ));
-    }, 3000); 
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   dispatch(setAllUsers(
+    //     // api.users.fetchAll()
+    //   ));
+    // }, 3000); 
+  }, []);
+
+  useEffect(() => {
+    const instance = axios.create({
+      baseURL: 'http://localhost:5000/',
+      timeout: 1000,
+      headers: {'X-Custom-Header': 'foobar'}
+    });
+
+    instance.get('/users').then((data) => {
+      console.log({data});
+    })
   }, []);
  
   const handleDelete = (userId) => {
@@ -89,7 +102,7 @@ const MyTableInfo = () => {
 
   const handleReset = () => {
     dispatch(setAllUsers(
-      api.users.fetchAll()
+      // api.users.fetchAll()
     ))
   };
 

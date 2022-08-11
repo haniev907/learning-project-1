@@ -1,4 +1,4 @@
-const users = [ 
+module.exports = [ 
     {
         _id: "ID: 1",
         name: "Username 1",
@@ -98,6 +98,3 @@ const users = [
     },
     
 ]
-export function fetchAll() {
-    return users
-}
