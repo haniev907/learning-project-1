@@ -1,0 +1,47 @@
+.game {
+  
+}
+
+.car {
+  width: 120px;
+  height: 80px;
+  background-color: black;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+
+  background: url(./icons/car.png);
+  background-size: 100% 100%;
+
+  /* transition: all 1s ease-in-out; */
+  /* animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: infinite; */
+}
+
+/* @keyframes slidein {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+
+  50% {
+    left: 400px;
+    top: 0px;
+  }
+
+  60% {
+    left: 400px;
+    top: 100px;
+  }
+
+  80% {
+    top: 100px;
+    left: 0px;
+  }
+
+  100% {
+    top: 0px;
+    left: 0px;
+  }
+} */
