@@ -1,10 +1,18 @@
 import React from 'react';
 
-const  ArhiveUsers = ( {arhiveUsers} ) => {
-    return ( 
+const  ArchiveUsers = ( {arсhiveUsers} ) => {
 
+  const count = arсhiveUsers.length;
+  
+  const archiveIsEmpty = () => {
+    return '';
+  };
+    return ( 
         <div>
-             <table class="table table-ligth table-striped">
+          {count === 0 ? (
+            archiveIsEmpty()
+          ):
+             <table className="table table-ligth table-striped">
           <thead>
             <tr>
               <th scope="col">ID пользователя</th>
@@ -12,12 +20,12 @@ const  ArhiveUsers = ( {arhiveUsers} ) => {
               <th scope="col">Качество</th>
               <th scope="col">Профессия</th>
               <th scope="col">Оценка</th>
-              <th>Колл-во пользователей в архиве : {arhiveUsers.length} </th>
+              <th>Колл-во пользователей в архиве : {count} </th>
             </tr>
           </thead>
           <tbody>
-            {arhiveUsers.map((user) => (
-              <tr key={user}>
+            {arсhiveUsers.map((user) => (
+              <tr key={user._id}>
                 <td>{user._id}</td>
                 <td className="">{user.name}</td>
                 <td className="td_table">{user.qualities}</td>
@@ -27,8 +35,9 @@ const  ArhiveUsers = ( {arhiveUsers} ) => {
             ))}
           </tbody>
         </table>
+}
     </div>
      );
 }
  
-export default ArhiveUsers;
+export default ArchiveUsers;

@@ -1,5 +1,5 @@
-import * as users from "./fake.api/user.api"
-const API = {
-    users
-}
-export default API
+export const instance = axios.create({
+  baseURL: 'http://localhost:5000/',
+  timeout: 1000,
+  headers: {'X-Custom-Header': 'foobar'}
+});

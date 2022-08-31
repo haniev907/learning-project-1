@@ -1,10 +1,11 @@
-const users = [ 
+module.exports = [ 
     {
         _id: "ID: 1",
         name: "Username 1",
         profession: 'Доктор',
         qualities:'тег 1',
         rate: 1,
+        isArchived: false
     },
     {
         _id: "ID: 2",
@@ -12,6 +13,7 @@ const users = [
         profession: 'Доктор',
         qualities:'тег 2',
         rate: 1,
+        isArchived: false
     },
     
     {
@@ -20,6 +22,7 @@ const users = [
         profession: 'Драматург',
         qualities:'тег 3',
         rate: 4,
+        isArchived: false
     },
     {
         _id: "ID: 4",
@@ -27,6 +30,7 @@ const users = [
         profession: 'Архeолог',
         qualities:'тег 4',
         rate: 5,
+        isArchived: false
     },
     {
         _id: "ID: 5",
@@ -34,6 +38,7 @@ const users = [
         profession: 'Официант',
         qualities:'тег 5',
         rate: 1,
+        isArchived: false
     },
     {
         _id: "ID: 6",
@@ -41,6 +46,7 @@ const users = [
         profession: 'Инженер',
         qualities:'тег 6',
         rate: 4.5,
+        isArchived: false
     },
     {
         _id: "ID: 7",
@@ -48,6 +54,7 @@ const users = [
         profession: 'Актер',
         qualities:'тег 7',
         rate: 2.5,
+        isArchived: false
     },
     {
         _id: "ID: 8",
@@ -55,6 +62,7 @@ const users = [
         profession: 'Инженер',
         qualities:'тег 8',
         rate: 4,
+        isArchived: false
     },
     {
         _id: "ID: 9",
@@ -62,6 +70,7 @@ const users = [
         profession: 'Инженер',
         qualities:'тег 9',
         rate: 5,
+        isArchived: false
     },
     {
         _id: "ID: 10",
@@ -69,6 +78,7 @@ const users = [
         profession: 'Повар',
         qualities:'тег 10',
         rate: 2,
+        isArchived: false
     },
     {
         _id: "ID: 11",
@@ -76,6 +86,7 @@ const users = [
         profession: 'Физик',
         qualities:'тег 11',
         rate: 5,
+        isArchived: false
     },
     {
         _id: "ID: 12",
@@ -83,9 +94,7 @@ const users = [
         profession: "Актер",
         qualities:'тег 12',
         rate: 3.5,
+        isArchived: false
     },
     
 ]
-export function fetchAll() {
-    return users
-}
