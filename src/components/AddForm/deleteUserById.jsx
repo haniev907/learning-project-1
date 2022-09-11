@@ -10,9 +10,9 @@ const DeleteUserById = ({ deleteUserById }) => {
     };
 
     return (
-        <div>
-            <input className='form-control text-field__input' type="number" placeholder="Введите id пользователя здесь" onChange={onChangeInput(setId)}/>
-            <button onClick={() => deleteUserById('ID: ' + id)} className = 'btn btn-danger btn-sm ms-2'>Удалить</button>
+        <div className='container-main'>
+            <input className='form-control text-field__input' type="number" placeholder="Введите id пользователя" onChange={onChangeInput(setId)}/>
+            <button onClick={() => deleteUserById('ID' + id)} className = 'btn btn-danger btn-sm ms-2'>Удалить</button>
         </div>
      );
 };

@@ -20,7 +20,7 @@ const AddForm = (props) => {
       profession: profession,
       qualities: quality,
       rate: estimation,
-      _id:'ID: ' + Math.random(),
+      _id:'ID'+ Math.random(),
     });
   };
 
