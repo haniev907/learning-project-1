@@ -30,7 +30,7 @@ const AddForm = (props) => {
       <input type={'text'} className="form-control input" value={quality} placeholder = "Качество" onChange={onChangeInput(setQuality)} />
       <input type={'text'} className="form-control input" value={profession} placeholder = "Профессия" onChange={onChangeInput(setProfession)} />
       <input type={'number'} className="form-control input" value={estimation} placeholder = "Оценка /5"  onChange={onChangeInput(setEstimation)} />
-      <button className="btn btn-outline-primary btn-sm button-next" onClick={onClickSubmit}>Добавить</button>
+      <button className="btn btn-outline-primary w-100 mt-1 btn-sm button-next" onClick={onClickSubmit}>Добавить</button>
     </div>
   );
 };

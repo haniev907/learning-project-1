@@ -1,64 +1,11 @@
-.input{
-    width: 30%;
-    margin-top: 10px;
-    margin-left: 30em;
+div.table__option{
+  width: 50%;
 }
-.inputEditForm{
-    width: 30%;
-    margin-top: 10px;
-    margin-left: 30em;
-}
-.buttonEdit{
-    width: 30%;
-    margin-top: 3px;
-    margin-left: 34.3em;
-}
-.divDeleteTable{
-    font-size: 18px;
-}
-.button-next{
-    width: 30%;
-    margin-top: 3px;
-    margin-left: 34.3em;
-}
-.inputEditNameForm{
-  width: 20%;
-  margin-top: -20px;
-  margin-left: 30em;
-}
-.btnEditName{
-  margin-top: -65px;
-  margin-left: 55.1em;
-}
-.delete_Button{
-    margin-left: 20px;
-}
-.table_length{
-    color: black;
-}
-.inputArhivForm{
-    width: 15%;
-}
-.text-field__input {
-    display: inline;
-    width: 13%;
-    height: 33px;
-    padding: 0.375rem 0.75rem;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #d4cdcd;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
   .text-field__input::after{
     border: 1px solid #d4cdcd;
   }
   .table__user-name{
+    text-decoration: underline;
     transition: font-size .2s linear;
   }
   .table__user-name:hover{
@@ -121,7 +68,7 @@
     width: 3%;
     height: 40px;
   }
-  .container{
+  .container_1{
    align-items: center;
    justify-content: center;
    display: flex;
@@ -129,15 +76,6 @@
    padding-top: 50px;
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-  .container-main{
-   align-items: center;
-   justify-content: center;
-   display: flex;
-   flex-direction: inherit;
-   margin-top: -39px;
-   margin-left: -24em;
-  }
-  
   .container__img{
     padding-left: 85px;
   }

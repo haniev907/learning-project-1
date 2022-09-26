@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
@@ -7,14 +7,14 @@ const UserPage = ( {userId} ) => {
 	const getById = (id) => Users.find((x) => x._id === id);
 	const Users = useSelector((state) => state.user.AllUsers);
 	const history = useHistory()
-	const [foundUser, setFoundUser] = useState(getById(userId));
+	const [foundUser] = useState(getById(userId));
 
 	const handleClick = () => {
 			history.push('/users')
 	}
 	if(foundUser) {
 			return (
-					<div className='container'>
+					<div className='container_1'>
                         <div className='block'>
                             <img className='container__img' style={{width: '300px'}} src='https://cdn-icons-png.flaticon.com/512/6997/6997519.png' alt='аватарка пользователя'/>
                             <h1 className='ms-2 container__h1'>{foundUser.name}</h1>

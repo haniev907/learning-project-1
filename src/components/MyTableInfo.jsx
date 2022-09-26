@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import AddForm from './AddForm';
-import EditForm from "./AddForm/editForm";
-import Loading from "./Loading";
-import DeleteUserById from "./AddForm/deleteUserById";
-import ArchiveUsers from './AddForm/arhiveUsers';
+import EditForm from "./AddForm/EditForm";
+import DeleteUserById from "./AddForm/DeleteByUserName";
+import ArchiveUsers from './AddForm/ArсhiveUsers';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setAllUsers } from "../features/user/userSlice";
 import { Link } from "react-router-dom";
+import Bookmark from "./Bookmark";
 
 const MyTableInfo = () => {
   const dispatch = useDispatch();
@@ -15,13 +15,13 @@ const MyTableInfo = () => {
 
   const [isAdding, setIsAdding] = useState(false);
   const [editingUser, setEditingUser] = useState();
-  
-  const handleDelete = (userId) => {
-    beforeUserDelete(userId)
-  };
+  const [searchQuery, setSearchQuery] = useState('');
+  const [openOptions, setOpenOptions] = useState(false)
 
-  const beforeUserDelete = (userId) => {
-    archiveUser(userId);
+  const handleDelete = (userName) => {
+   dispatch(setAllUsers(
+    Users.filter((user) => user.name !== userName)
+   ))
   };
 
   const archiveUser = (id) => {
@@ -62,43 +62,69 @@ const MyTableInfo = () => {
   const onUserEdit = () => {
     setEditingUser(null);
   };
-  const  resultAfterDeletingAllUsers = () => {
-     return (
-      <span className="badge  bg-danger m-2">Все пользователи были перемещены в архив</span>
-     )
-  }
+
+  const handleSearchQuery = (e) => {
+    setSearchQuery(e.target.value)
+  };
   const existingUsers = Users.filter(x => !x.isArchived);
+  
+  const filteredUser = existingUsers.filter((user) => {
+    return user.name.toLowerCase().includes(searchQuery.toLowerCase())
+});
+const handleToogle = (id) => {
+  dispatch(setAllUsers(
+    Users.map((user) => {
+      if(user._id === id){
+        return { ...user, bookmark: !user.bookmark };
+      };
+      return user;
+    })
+  ))
+}
+
   return (
+    
     <div> 
-      <>
-        {existingUsers.length === 0 ? '' : 
-         <table className="table table table-dark table-striped">
+         <input
+          type = 'search'
+          placeholder="Поиск..." 
+          name="searchQuery"
+          className='form-control border border-primary w-50 mx-auto mt-2'
+          value={searchQuery}
+          onChange={handleSearchQuery}
+        />
+        {filteredUser.length === 0 ? '' : 
+         <table className="table table table-striped w-50 mx-auto">
          <thead>
            <tr>
              <th scope="col">Имя</th>
              <th scope="col">Качество</th>
              <th scope="col">Профессия</th>
              <th scope="col">Оценка</th>
-             <th>Количество пользователей: {existingUsers.length}</th>
+             <th style={{fontSize: '14px' , width: 300}} scope="col">В Избранное</th>
+             <th style={{fontSize: '14px'}}>Количество пользователей: {filteredUser.length}</th>
            </tr>
          </thead>
          <tbody>
-           {existingUsers.map((user) => (
+           {filteredUser.map((user) => (
              <tr key={user._id}>
-               <td className="table__user-name"><Link to={`/Users/${user._id}`}>{user.name}</Link></td>
+               <td className="table__user-name">
+                <Link to={`/Users/${user._id}`} className = 'text-primary'>{user.name}</Link>
+              </td>
                <td className="td_table">{user.qualities}</td>
                <td>{user.profession}</td>
                <td>{user.rate} /5</td>
+               <td><Bookmark user = {user} toggleUser = {handleToogle}/></td>
                <td className="table-light">
                  <button
-                   className={"btn btn-secondary delete_Button"}
-                   onClick={() => handleDelete(user._id)}
+                   className={"btn btn-secondary mt-1 ms-1 delete_Button"}
+                   onClick={() => archiveUser(user._id)}
                  >
                    В архив
                  </button>
                  <button
-                   className={"btn btn-primary ms-2"}
-                   onClick = {() => handleEdit(user._id)}
+                   className={"btn btn-primary mt-1 ms-1 "}
+                   onClick = {() => handleEdit(user._id) + setOpenOptions(true)}
                  >
                    Редактировать
                  </button>
@@ -107,23 +133,30 @@ const MyTableInfo = () => {
            ))}
          </tbody>
        </table>
-} </>
-
-     {!existingUsers.length ? '' : <>
+}     {!filteredUser.length ? '' : 
+     <div className="table__option mx-auto">
+    {openOptions ? '' : <button className="btn btn-sm btn-primary w-100 table__btn-option" onClick={() => setOpenOptions(true)}>Опции</button>}
+      {
+        openOptions && 
+        <>
+        { !editingUser && !isAdding ? <DeleteUserById deleteUserByUserName={handleDelete} /> : null }
      <button
-        className={"btn btn-primary btn-sm Add_Button"}
+        className={"btn btn-primary mb-2 btn-sm Add_Button"}
         onClick={() => {
           setIsAdding(true);
         }}
       >
         Добавить пользователя
       </button>
-      
-      <button onClick={archiveAllUsers} className="btn btn-primary btn-sm m-2">Добавить вcех в архив</button>
+      {!isAdding && <button onClick={archiveAllUsers} className="btn btn-primary btn-sm ms-1 mb-2">Добавить вcех в архив</button>}
       { editingUser ? <EditForm editUser={editUser} editingUser={editingUser} /> : null }
       { isAdding ? <AddForm addUser={addUser} /> : null}
-      { !editingUser && !isAdding ? <DeleteUserById deleteUserById={handleDelete} /> : null }
-     </>}
+     <button className="btn btn-sm btn-danger mt-2 w-100" onClick={() => setOpenOptions(false)}>закрыть</button> 
+
+        </>
+      }
+     </div>
+     }
       <ArchiveUsers arсhiveUsers = {Users.filter(x => x.isArchived)} />
    </div>
   );

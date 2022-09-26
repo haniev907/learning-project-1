@@ -1,16 +1,32 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import RegisterForm from '../components/RegisterForm';
+import LoginForm from './LoginForm'
+const Login = () => {
 
-const Login = () => (
-    <form style={{width: '30%', margin: '0 auto', fontFamily: 'sans-serif'}}>
-        <div style={{paddingTop: '200px'}} className='mb-3'>
-        <h1 style={{paddingLeft: '3.8em'}} className = 'mb-4'>LOGIN</h1>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='Введите ваш email' />
+    const {type} = useParams()
+    const [formType, setFormType] = React.useState(type === 'register' ? type : 'login');
+
+    const toggleForm = () => {
+        setFormType(prevState => prevState === 'register' ? 'login' : 'register')
+    }
+    return ( 
+        <div className='container mt-5'>
+            <div className='row'>
+                <div className='.col-md-6 .offset-md-3 shadow p-4'>
+                    {formType === 'register' ? <>
+                    <h3 className='mb-4'>Register</h3>
+                    <RegisterForm/> 
+                    <p>Already have account? <a onClick={toggleForm} role='button'>Sign In</a></p>
+                    </> : <>
+                    <h3 className='mb-4'>Login</h3>
+                    <LoginForm/>
+                    <p>Dont have account? <a onClick={toggleForm} role='button'>Sign Up</a></p>
+                     </>}
+            </div>
+          </div>
         </div>
-        <div className='mb-4'>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder='Введите ваш пароль'/>
-        </div>
-        <button type="submit" style={{width: '100%'}} class="btn btn-primary">Submit</button>
-    </form>
-)
+     );
+}
  
 export default Login;

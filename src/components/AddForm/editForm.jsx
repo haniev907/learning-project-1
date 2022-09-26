@@ -10,7 +10,6 @@ const EditForm = (props) => {
     const onChangeInput = (cb) => {
       return (event) => {
         const value = event.target.value;
-    
         cb(value);
       };
     };
@@ -30,7 +29,7 @@ const EditForm = (props) => {
         <input type={'text'} className="form-control inputEditForm" value={quality} placeholder = "Качество" onChange={onChangeInput(setQuality)} />
         <input type={'text'} className="form-control inputEditForm" value={profession} placeholder = "Профессия" onChange={onChangeInput(setProfession)} />
         <input type={'number'} className="form-control inputEditForm" value={estimation} placeholder = "Оценка /5"  onChange={onChangeInput(setEstimation)} />
-        <button className="btn btn-outline-primary btn-sm buttonEdit" onClick={onClickSubmit}>Редактировать</button>
+        <button className="btn btn-primary btn-sm w-100" onClick={onClickSubmit}>Редактировать</button>
       </div>
     );
   };
