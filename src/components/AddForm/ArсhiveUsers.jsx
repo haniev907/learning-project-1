@@ -1,29 +1,37 @@
-import React from 'react';
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { setAllUsers } from '../../features/user/userSlice' 
+import { setAllUsers } from "../../features/user/userSlice";
 
-const  ArchiveUsers = ( {arсhiveUsers} ) => {
-
+const ArchiveUsers = ({ arсhiveUsers }) => {
   const count = arсhiveUsers.length;
 
   const dispatch = useDispatch();
   const Users = useSelector((state) => state.user.AllUsers);
 
   const handleDelete = (id) => {
-    dispatch(setAllUsers(
-      Users.map(user => user._id === id ? { ...user, isArchived: false } : user)
-    ));
+    dispatch(
+      setAllUsers(
+        Users.map((user) =>
+          user._id === id ? { ...user, isArchived: false } : user
+        )
+      )
+    );
+  };
+  const archiveAllUsers = () => {
+    dispatch(
+      setAllUsers(Users.map((user) => ({ ...user, isArchived: false })))
+    );
   };
   const archiveIsEmpty = () => {
-    return '';
+    return "";
   };
-    return ( 
-        <div>
-          {count === 0 ? (
-            archiveIsEmpty()
-          ):
-             <table className="table table-ligth table-striped">
+  return (
+    <div>
+      {count === 0 ? (
+        archiveIsEmpty()
+      ) : (
+        <table className="table table-ligth table-striped">
           <thead>
             <tr>
               <th scope="col">ID пользователя</th>
@@ -32,6 +40,14 @@ const  ArchiveUsers = ( {arсhiveUsers} ) => {
               <th scope="col">Профессия</th>
               <th scope="col">Оценка</th>
               <th>Колл-во пользователей в архиве : {count} </th>
+              <th>
+                <button
+                  onClick={archiveAllUsers}
+                  className="btn btn-success btn-sm ms-1"
+                >
+                  Восстановить вcех
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -42,14 +58,21 @@ const  ArchiveUsers = ( {arсhiveUsers} ) => {
                 <td className="td_table">{user.qualities}</td>
                 <td className="">{user.profession}</td>
                 <td className="">{user.rate}</td>
-                <td><button className='btn btn-danger btn-sm' onClick={() => handleDelete(user._id)}>удалить из архива</button></td>
+                <td>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => handleDelete(user._id)}
+                  >
+                    восстановить из архива
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-}
+      )}
     </div>
-     );
-}
- 
+  );
+};
+
 export default ArchiveUsers;

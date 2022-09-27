@@ -1,11 +1,15 @@
-import React from 'react';
+import React from "react";
 
-const Bookmark = ({user, toggleUser}) => {
-    return ( 
-        <button>
-             <i className={"bi bi-bookmark" + (user.bookmark ? "-heart-fill" : "")} onClick = {() => toggleUser(user._id)}></i>
-        </button>
-     );
-}
- 
+const Bookmark = ({ user, toggleUser }) => {
+  const getInputClasses = () => {
+    return "bi bi-bookmark" + (user.bookmark ? "-heart-fill" : "");
+  };
+
+  return (
+    <button>
+      <i className={getInputClasses()} onClick={() => toggleUser(user._id)}></i>
+    </button>
+  );
+};
+
 export default Bookmark;
