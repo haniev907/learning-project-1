@@ -97,15 +97,17 @@ const MyTableInfo = () => {
 
   return (
     <div>
-      <input
-        type="search"
-        placeholder="Поиск..."
-        name="searchQuery"
-        className="form-control border border-primary w-50 mx-auto mt-2"
-        value={searchQuery}
-        onChange={handleSearchQuery}
-      />
-      {filteredUser.length === 0 ? (
+      {
+        <input
+          type="search"
+          placeholder="Поиск..."
+          name="searchQuery"
+          className="form-control border border-primary w-50 mx-auto mt-2"
+          value={searchQuery}
+          onChange={handleSearchQuery}
+        />
+      }
+      {currentUser.length === 0 ? (
         ""
       ) : (
         <table className="table table table-striped w-50 mx-auto">
@@ -118,8 +120,8 @@ const MyTableInfo = () => {
               <th style={{ fontSize: "13px", width: 300 }} scope="col">
                 В Избранное
               </th>
-              <th style={{ fontSize: "14px" }}>
-                Количество пользователей: {filteredUser.length}
+              <th style={{ fontSize: "12px" }}>
+                Кол-во пользователей на странице: {currentUser.length}
               </th>
             </tr>
           </thead>
@@ -156,7 +158,7 @@ const MyTableInfo = () => {
           </tbody>
         </table>
       )}{" "}
-      {!filteredUser.length ? (
+      {!currentUser.length ? (
         ""
       ) : (
         <div className="table__option mx-auto">
