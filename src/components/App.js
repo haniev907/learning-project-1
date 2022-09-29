@@ -8,23 +8,20 @@ import { Redirect, Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import { setAllUsers } from "../features/user/userSlice";
 import axios from "axios";
+import Loading from "./Loading";
 
 const App = () => {
-  const [isLoading, setLoading] = useState(false);
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     const instance = axios.create({
       baseURL: "http://127.0.0.1:5000/",
       timeout: 10000,
       headers: { "X-Custom-Header": "foobar" },
     });
-
     setTimeout(() => {
       instance.get("/users").then((response) => {
-        // setLoading(true);
         dispatch(setAllUsers(response.data.users));
-        // setLoading(false)
       });
     }, 3000);
   }, []);

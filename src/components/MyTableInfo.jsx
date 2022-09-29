@@ -9,6 +9,7 @@ import { setAllUsers } from "../features/user/userSlice";
 import { Link } from "react-router-dom";
 import Bookmark from "./Bookmark";
 import Paginate from "./Paginate";
+import _ from "lodash";
 
 const MyTableInfo = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const MyTableInfo = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [openOptions, setOpenOptions] = React.useState(false);
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [usersPerPage] = React.useState(6);
+  const [usersPerPage] = React.useState(4);
 
   const handleDelete = (userName) => {
     dispatch(setAllUsers(Users.filter((user) => user.name !== userName)));
@@ -68,6 +69,7 @@ const MyTableInfo = () => {
 
   const handleSearchQuery = (e) => {
     setSearchQuery(e.target.value);
+    setCurrentPage(1);
   };
 
   const existingUsers = Users.filter((x) => !x.isArchived);
@@ -89,7 +91,8 @@ const MyTableInfo = () => {
   };
   const lastIndex = currentPage * usersPerPage;
   const firstIndex = lastIndex - usersPerPage;
-  const currentUser = filteredUser.slice(firstIndex, lastIndex);
+  const sortedUsers = _.orderBy(filteredUser, ["name"], ["asc"]);
+  const currentUser = sortedUsers.slice(firstIndex, lastIndex);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -97,7 +100,9 @@ const MyTableInfo = () => {
 
   return (
     <div>
-      {
+      {!currentUser.length ? (
+        ""
+      ) : (
         <input
           type="search"
           placeholder="Поиск..."
@@ -106,7 +111,7 @@ const MyTableInfo = () => {
           value={searchQuery}
           onChange={handleSearchQuery}
         />
-      }
+      )}
       {currentUser.length === 0 ? (
         ""
       ) : (
